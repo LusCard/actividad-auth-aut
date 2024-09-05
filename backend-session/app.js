@@ -4,8 +4,8 @@ import session from "express-session";
 import morgan from "morgan";
 import path from "path";
 
-import { database } from "./db/database.js";
 import { routes } from "./routes/routes.js";
+import { createTable } from "./database/database.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -41,3 +41,4 @@ app.use("/api/", routes);
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}/`)
 );
+createTable();
