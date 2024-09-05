@@ -6,9 +6,10 @@ import path from "path";
 
 import { routes } from "./routes/routes.js";
 import { createTable } from "./database/database.js";
+import { GV } from "./config.js";
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = GV.PORT || 4000;
 
 const __dirname = path.resolve();
 
@@ -16,7 +17,7 @@ const __dirname = path.resolve();
 app.use(
   cors({
     // Permitir solicitudes desde el front-end
-    origin: ["http://localhost:5500", "http://localhost:3000"],
+    origin: ["http://localhost:4000/login", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // Habilitar envío de cookies
   })

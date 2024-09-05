@@ -1,6 +1,6 @@
 export const GV = {};
 
-GV.PORT = "3000";
+GV.PORT = 5000;
 GV.DB_USER = "root";
 GV.DB_HOST = "localhost";
 GV.DB_NAME = "db_system";
