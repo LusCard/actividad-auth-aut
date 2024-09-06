@@ -19,7 +19,7 @@ export function Header() {
       <!-- Enlaces de navegación alineados a la izquierda -->
       <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="navbarNav">
         <ul class="lg:flex space-x-6">
-          <li><a href="home.html" class="text-gray-700 hover:text-gray-900">Home</a></li>
+          <li><a href="/" class="text-gray-700 hover:text-gray-900">Home</a></li>
           <li><a href="blog.html" class="text-gray-700 hover:text-gray-900">Blog</a></li>
           <li><a href="about.html" class="text-gray-700 hover:text-gray-900">About</a></li>
         </ul>

@@ -1,8 +1,8 @@
-export function Register() {
+export function Home() {
   const container = document.createElement("div");
   container.classList.add("container");
-
   container.innerHTML = `
-  <p>This should be a Register Form</p>
-  `;
+    <p>Hello sweet home</p>
+    `;
+  return container;
 }
