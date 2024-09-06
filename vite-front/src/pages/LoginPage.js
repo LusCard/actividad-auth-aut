@@ -22,7 +22,7 @@ export function Login() {
                       </div>
                       <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ingresar</button>
                   </form>
-                  <p id="message" class="text-red-500 text-center mt-4"></p>
+                  <a class="text-align-left mt-4" href="/register">¿No tenés una cuenta?</a>
               </div>
           </div>
       </div>`;

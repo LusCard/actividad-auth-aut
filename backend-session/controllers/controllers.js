@@ -16,6 +16,11 @@ controllers.register = async (req, res) => {
   const [user] = await connection
     .promise()
     .query(regisquery, [username, password]);
+
+  // Save user info in the session
+  req.session.userId = user.id;
+  req.session.username = user.username;
+
   if (user.affectedRows === 1) {
     return res.status(201).json({ message: "Usuario creado exitosamente" });
   } else {

@@ -2,11 +2,12 @@ export function Header() {
   const header = document.createElement("header");
 
   header.classList.add("container");
-  header.innerHTML = `<nav class="bg-gray-100 mb-3 p-4 shadow-md">
+  header.innerHTML = `
+  <nav class="bg-gray-100 mb-3 p-4 shadow-md">
     <div class="container mx-auto flex items-center justify-between">
       <!-- Logo o marca -->
-      <a href="#" class="flex items-center">
-        <img src="img/lockdev.webp" alt="" class="w-12 h-12">
+      <a href="" class="flex items-center">
+        <img src="./src/img/img.jpg" alt="" class="w-12 h-12 rounded-full">
       </a>
       <button class="lg:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
         <!-- Icono de toggle para dispositivos móviles -->
@@ -29,6 +30,7 @@ export function Header() {
       <div class="hidden lg:flex lg:items-center">
         <ul class="flex space-x-4">
           <li><a id="user-name" href="#" class="text-gray-700 hover:text-gray-900">NotLogged</a></li>
+          <li><a href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</a></li>
           <li><a id="logout" href="#" class="text-red-500 hover:text-red-700">Salir</a></li>
         </ul>
       </div>
