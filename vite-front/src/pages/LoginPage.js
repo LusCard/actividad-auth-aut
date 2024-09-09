@@ -1,3 +1,5 @@
+import { loginUser } from "../petitions.js";
+
 export function Login() {
   const container = document.createElement("div");
 
@@ -26,5 +28,23 @@ export function Login() {
               </div>
           </div>
       </div>`;
+  const loginForm = container.querySelector("#login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = container.querySelector("#username").value;
+      const password = container.querySelector("#password").value;
+
+      try {
+        const data = await loginUser(username, password);
+        console.log("login succesful", data);
+        window.location.href = "/";
+      } catch (error) {
+        console.log("Login unsuccesful", error.message);
+        container.querySelector("#message").textContent = error.message;
+      }
+    });
+  }
   return container;
 }

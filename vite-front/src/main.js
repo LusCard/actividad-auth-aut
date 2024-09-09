@@ -10,7 +10,7 @@ const app = document.querySelector("#app");
 
 if (app) {
   app.innerHTML = "";
-  app.appendChild(Header());
+  app.append(Header());
 
   // Route handling
   if (pathname === "/") {
@@ -20,48 +20,7 @@ if (app) {
   } else if (pathname === "/login") {
     const loginComponent = Login();
     app.appendChild(loginComponent);
-
-    // Login form logic
-    const loginForm = loginComponent.querySelector("#login-form");
-
-    if (loginForm) {
-      loginForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const username = document.querySelector("#username").value;
-        const password = document.querySelector("#password").value;
-
-        try {
-          const response = await fetch("http://localhost:4000/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include", // Allow cookies to be sent
-            body: JSON.stringify({ username, password }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            // Successfully logged in
-            console.log("Login successful:", data);
-            window.location.href = "/dashboard"; // Redirect to dashboard
-          } else {
-            // Handle login error
-            console.error("Login failed:", data.message);
-            document.querySelector("#message").textContent = data.message;
-          }
-        } catch (error) {
-          console.error("Error during login:", error);
-        }
-      });
-    }
-  } else {
-    const errorMsg = document.createElement("p");
-    errorMsg.textContent = "No se encuentra la página solicitada";
-    app.appendChild(errorMsg);
   }
 
-  app.appendChild(Footer());
+  app.append(Footer());
 }

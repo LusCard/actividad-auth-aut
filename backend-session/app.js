@@ -23,12 +23,14 @@ app.use(
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: "mi_secreto",
     resave: false,
     saveUninitialized: true,
+    name: "lacuki",
     cookie: {
       secure: false, // true solo si usas HTTPS
       httpOnly: true, // evita acceso a cookie desde JavaScript del cliente
