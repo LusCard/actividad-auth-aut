@@ -47,5 +47,29 @@ export function Register() {
     </div>
   `;
 
+  const regisForm = container.querySelector("#register-form");
+  regisForm.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const username = regisForm.querySelector("#username").value;
+    const password = regisForm.querySelector("#password").value;
+    const confirmPassword = regisForm.querySelector("#confirm-password").value;
+
+    if (!username || !password) {
+      const message = "All fields must be filled in.";
+      document.querySelector("#message").innerHTML = message;
+    } else if (password === confirmPassword) {
+      const message = "Passwords do not match";
+      document.querySelector("#message").innerHTML = message;
+    } else {
+      try {
+        const data = await regisForm(username, password);
+        console.log("Registration successful", data);
+        window.location.href = "/home";
+      } catch (error) {
+        console.log("Registration unsuccessful", error.message);
+      }
+    }
+  });
+
   return container;
 }

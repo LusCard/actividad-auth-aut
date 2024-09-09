@@ -39,7 +39,7 @@ export function Login() {
       try {
         const data = await loginUser(username, password);
         console.log("login succesful", data);
-        window.location.href = "/";
+        window.location.href = "/home";
       } catch (error) {
         console.log("Login unsuccesful", error.message);
         container.querySelector("#message").textContent = error.message;
