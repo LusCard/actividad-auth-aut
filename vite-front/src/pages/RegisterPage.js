@@ -1,3 +1,5 @@
+import { regisUser } from "../petitions";
+
 export function Register() {
   const container = document.createElement("div");
 
@@ -57,12 +59,12 @@ export function Register() {
     if (!username || !password) {
       const message = "All fields must be filled in.";
       document.querySelector("#message").innerHTML = message;
-    } else if (password === confirmPassword) {
+    } else if (password !== confirmPassword) {
       const message = "Passwords do not match";
       document.querySelector("#message").innerHTML = message;
     } else {
       try {
-        const data = await regisForm(username, password);
+        const data = await regisUser(username, password);
         console.log("Registration successful", data);
         window.location.href = "/home";
       } catch (error) {

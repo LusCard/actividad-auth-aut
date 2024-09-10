@@ -1,3 +1,4 @@
+import { authCheck } from "../petitions.js";
 export function Header() {
   const header = document.createElement("header");
 
@@ -29,7 +30,7 @@ export function Header() {
       <!-- Nombre de usuario y botón de logout alineados a la derecha -->
       <div class="hidden lg:flex lg:items-center">
         <ul class="flex space-x-4">
-          <li><a id="user-name" href="#" class="text-gray-700 hover:text-gray-900">NotLogged</a></li>
+          <li><p id="user-name" href="#" class="text-gray-700 hover:text-gray-900">NotLogged</p></li>
           <li><a href="/login" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</a></li>
           <li><a id="logout" href="#" class="text-red-500 hover:text-red-700">Salir</a></li>
         </ul>
@@ -38,5 +39,25 @@ export function Header() {
   </nav>
   `;
 
+  const logoutBtn = header.querySelector("#logout");
+  logoutBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:5000/api/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        console.log("logout successful");
+        window.location.href = "/login";
+      } else {
+        console.log("Failed to logout");
+      }
+    } catch (error) {
+      console.log("Error during logout", error);
+    }
+  });
   return header;
 }

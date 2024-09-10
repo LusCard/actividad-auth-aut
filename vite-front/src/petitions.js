@@ -8,7 +8,7 @@ export const loginUser = async (username, password) => {
       credentials: "include",
       body: JSON.stringify({ username, password }),
     });
-    if (response.ok) {
+    if (!response.ok) {
       const data = await response.json();
       throw new Error(data.message);
     }
@@ -27,7 +27,7 @@ export const regisUser = async () => {
       credentials: "include",
       body: JSON.stringify({ username, password }),
     });
-    if (response.ok) {
+    if (!response.ok) {
       const data = await response.json();
       throw new Error(data.message);
     }
@@ -50,7 +50,7 @@ export const authCheck = async () => {
       return false;
     }
   } catch (error) {
-    console.errror("Error checkign auth", error);
+    console.error("Error checkign auth", error);
     return false;
   }
 };

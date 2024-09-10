@@ -30,29 +30,26 @@ controllers.register = async (req, res) => {
 
 controllers.login = async (req, res) => {
   const { username, password } = req.body;
+  const sql = "SELECT * FROM users WHERE username = ?";
+  const [rows] = await connection.promise().query(sql, [username]);
 
-  try {
-    const sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+  if (rows.length > 0) {
+    return res.status(409).json({ message: "El nombre está en uso" });
+  }
 
-    const [rows] = await connection.promise().query(sql, [username, password]);
+  const regisQuery = "INSERT INTO users (username, password) VALUES (?,?)";
+  const [result] = await connection
+    .promise()
+    .query(regisQuery, [username, password]);
 
-    const user = rows[0];
-    console.log(user);
-    if (!user) {
-      return res.status(401).json({ message: "Credenciales incorrectas" });
-    }
+  //save user info in session
+  req.session.userId = result.insertId;
+  req.session.username = username;
 
-    // Save user info in the session
-    req.session.userId = user.id;
-    req.session.username = user.username;
-
-    return res.json({
-      message: "Inicio de sesión exitoso",
-      user: { id: user.id, username: user.username },
-    });
-  } catch (error) {
-    console.error("Error in login:", error);
-    return res.status(500).json({ message: "Error en el servidor" });
+  if (result.affectedRows === 1) {
+    return res.status(201).json({ message: "Usuario creado" });
+  } else {
+    return res.status(500).json({ message: "Error al crear usuario" });
   }
 };
 
@@ -61,6 +58,7 @@ controllers.session = async (req, res) => {
     return res.json({
       loggedIn: true,
       user: { id: req.session.userId, username: req.session.username },
+      message: "Sesion establecida",
     });
   } else {
     return res
@@ -75,7 +73,7 @@ controllers.logout = async (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Error al cerrar la sesión" });
     }
-    res.clearCookie("connect.sid"); // Nombre de cookie por defecto para express-session
+    res.clearCookie("lacuki"); // Nombre de cookie por defecto para express-session
     return res.json({ message: "Sesión cerrada exitosamente" });
   });
 };
